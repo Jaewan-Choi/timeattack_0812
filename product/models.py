@@ -14,9 +14,9 @@ class Product(models.Model):
 
 
 class ProductStatus(models.Model):
-    buy_date = models.DateField(auto_now_add=True)
-    start_date = models.DateField(auto_now_add=True)
-    end_date = models.DateField()
+    buy_date = models.DateTimeField(auto_now_add=True)
+    start_date = models.DateTimeField(auto_now_add=True)
+    end_date = models.DateTimeField()
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 

@@ -24,14 +24,13 @@ class ActiveProductView(APIView):
         get_user = request.user
         find_product = Product.objects.get(name=get_product)
         find_user = User.objects.get(email=get_user)
-        start_product = ProductStatus
-        start_product.end_date = datetime.now() + relativedelta(years=1)
-        start_product.product = find_product.id
-        start_product.user = find_user.id
+        start_product = {}
+        start_product['end_date'] = datetime.now() + relativedelta(years=1)
+        start_product['product'] = find_product.id
+        start_product['user'] = find_user.id
         product_status_serializer = ProductStatusSerializer(data=start_product)
         if product_status_serializer.is_valid():
-            print('통과o')
             product_status_serializer.save()
+            return Response('세이브 성공')
         else:
-            print(product_status_serializer)
-        return Response()
+            return Response(product_status_serializer.errors)
